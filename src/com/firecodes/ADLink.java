@@ -17,9 +17,8 @@ public class ADLink {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("Launching login view form");
-        LoginView loginViewForm = new LoginView();
-        loginViewForm.setVisible(true);
+        // Open the LoginView JFrame
+        new LoginView().setVisible(true);
     }
     
 }
