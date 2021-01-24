@@ -6,6 +6,7 @@
 package com.firecodes.views;
 
 import com.firecodes.services.GlobalService;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -54,10 +55,27 @@ public class LoginView extends javax.swing.JFrame {
         domainLabel.setText("Dominio:");
 
         domainTxtField.setToolTipText("");
+        domainTxtField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                domainTxtFieldKeyReleased(evt);
+            }
+        });
 
         usernameLabel.setText("Nombre de usuario:");
 
+        usernameTxtField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                usernameTxtFieldKeyReleased(evt);
+            }
+        });
+
         passwordLabel.setText("Contraseña:");
+
+        passwordTxtField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                passwordTxtFieldKeyReleased(evt);
+            }
+        });
 
         loginBtn.setText("Iniciar Sesión");
         loginBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -118,19 +136,55 @@ public class LoginView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // Method that is triggered when the user clicks in the "Login" button
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
+        this.login();
+    }//GEN-LAST:event_loginBtnActionPerformed
 
+    private void domainTxtFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_domainTxtFieldKeyReleased
+        // Verify if the key-released is the Enter key
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.login();
+        }
+    }//GEN-LAST:event_domainTxtFieldKeyReleased
+
+    private void usernameTxtFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usernameTxtFieldKeyReleased
+        // Verify if the key-released is the Enter key
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.login();
+        }
+    }//GEN-LAST:event_usernameTxtFieldKeyReleased
+
+    private void passwordTxtFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordTxtFieldKeyReleased
+        // Verify if the key-released is the Enter key
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.login();
+        }
+    }//GEN-LAST:event_passwordTxtFieldKeyReleased
+
+    // Method to do login
+    private void login() {
+        if (this.verifyInputs()) {
+            this.service.showMessage(this, "Inicio de sesión completo", "Inicio de sesión completo", "plain");
+        }
+    }
+
+    // Method to verify login inputs
+    private boolean verifyInputs() {
         // Determinate if the required textfields are not empty
         if (this.domainTxtField.getText().isEmpty()) {
             this.service.showMessage(this, "El campo de \"Dominio\" no debe de esar vacío.", "Campos requeridos sin rellenar", "warning");
+            return false;
         } else if (this.usernameTxtField.getText().isEmpty()) {
             this.service.showMessage(this, "El campo de \"Nombre de usuario\" no debe de esar vacío.", "Campos requeridos sin rellenar", "warning");
+            return false;
         } else if (this.passwordTxtField.getText().isEmpty()) {
             this.service.showMessage(this, "El campo de \"contraseña\" no debe de esar vacío.", "Campos requeridos sin rellenar", "warning");
+            return false;
         }
-    }//GEN-LAST:event_loginBtnActionPerformed
+        return true;
+    }
 
-    // Method to generate error messages 
     /**
      * @param args the command line arguments
      */

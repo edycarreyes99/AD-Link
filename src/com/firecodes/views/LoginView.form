@@ -102,6 +102,9 @@
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="domainTxtFieldKeyReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="usernameLabel">
       <Properties>
@@ -109,6 +112,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="usernameTxtField">
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="usernameTxtFieldKeyReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="passwordLabel">
       <Properties>
@@ -116,6 +122,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JPasswordField" name="passwordTxtField">
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="passwordTxtFieldKeyReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="loginBtn">
       <Properties>

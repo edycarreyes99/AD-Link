@@ -6,6 +6,8 @@
 package com.firecodes.services;
 
 import java.awt.Component;
+import java.net.MalformedURLException;
+import java.net.URL;
 import javax.swing.JOptionPane;
 
 /**
@@ -33,7 +35,7 @@ public class GlobalService {
                                         : dialogType == "plain"
                                                 ? JOptionPane.PLAIN_MESSAGE
                                                 : JOptionPane.PLAIN_MESSAGE;
-        
+
         JOptionPane.showMessageDialog(context, message, title, type);
     }
 
