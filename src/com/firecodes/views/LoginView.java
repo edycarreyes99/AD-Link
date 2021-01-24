@@ -5,11 +5,17 @@
  */
 package com.firecodes.views;
 
+import com.firecodes.services.GlobalService;
+import javax.swing.JOptionPane;
+
 /**
  *
- * @author edycarreyes99
+ * @author Edycar Reyes
  */
 public class LoginView extends javax.swing.JFrame {
+
+    // Component's variables
+    GlobalService service;
 
     /**
      * Creates new form LoginView
@@ -17,6 +23,8 @@ public class LoginView extends javax.swing.JFrame {
     public LoginView() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setTitle("AD Link - Login");
+        this.service = new GlobalService();
     }
 
     /**
@@ -29,32 +37,100 @@ public class LoginView extends javax.swing.JFrame {
     private void initComponents() {
 
         appNameLabel = new javax.swing.JLabel();
+        domainLabel = new javax.swing.JLabel();
+        domainTxtField = new javax.swing.JTextField();
+        usernameLabel = new javax.swing.JLabel();
+        usernameTxtField = new javax.swing.JTextField();
+        passwordLabel = new javax.swing.JLabel();
+        passwordTxtField = new javax.swing.JPasswordField();
+        loginBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         appNameLabel.setFont(new java.awt.Font("Fira Sans", 0, 36)); // NOI18N
         appNameLabel.setText("AD Link");
 
+        domainLabel.setLabelFor(domainTxtField);
+        domainLabel.setText("Dominio:");
+
+        domainTxtField.setToolTipText("");
+
+        usernameLabel.setText("Nombre de usuario:");
+
+        passwordLabel.setText("Contraseña:");
+
+        loginBtn.setText("Iniciar Sesión");
+        loginBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(139, 139, 139)
-                .addComponent(appNameLabel)
-                .addContainerGap(139, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(127, 127, 127)
+                        .addComponent(appNameLabel)
+                        .addContainerGap(139, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(domainLabel)
+                            .addComponent(passwordLabel)
+                            .addComponent(usernameLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(usernameTxtField)
+                            .addComponent(domainTxtField)
+                            .addComponent(passwordTxtField))
+                        .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(loginBtn)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(appNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(198, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(domainLabel)
+                    .addComponent(domainTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(usernameLabel)
+                    .addComponent(usernameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(passwordLabel)
+                    .addComponent(passwordTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(loginBtn)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
+
+        // Determinate if the required textfields are not empty
+        if (this.domainTxtField.getText().isEmpty()) {
+            this.service.showMessage(this, "El campo de \"Dominio\" no debe de esar vacío.", "Campos requeridos sin rellenar", "warning");
+        } else if (this.usernameTxtField.getText().isEmpty()) {
+            this.service.showMessage(this, "El campo de \"Nombre de usuario\" no debe de esar vacío.", "Campos requeridos sin rellenar", "warning");
+        } else if (this.passwordTxtField.getText().isEmpty()) {
+            this.service.showMessage(this, "El campo de \"contraseña\" no debe de esar vacío.", "Campos requeridos sin rellenar", "warning");
+        }
+    }//GEN-LAST:event_loginBtnActionPerformed
+
+    // Method to generate error messages 
     /**
      * @param args the command line arguments
      */
@@ -92,5 +168,12 @@ public class LoginView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel appNameLabel;
+    private javax.swing.JLabel domainLabel;
+    private javax.swing.JTextField domainTxtField;
+    private javax.swing.JButton loginBtn;
+    private javax.swing.JLabel passwordLabel;
+    private javax.swing.JPasswordField passwordTxtField;
+    private javax.swing.JLabel usernameLabel;
+    private javax.swing.JTextField usernameTxtField;
     // End of variables declaration//GEN-END:variables
 }

@@ -9,7 +9,7 @@ import com.firecodes.views.LoginView;
 
 /**
  *
- * @author edycarreyes99
+ * @author Edycar Reyes
  */
 public class ADLink {
 
