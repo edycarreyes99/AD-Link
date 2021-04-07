@@ -100,6 +100,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="domainTxtField">
       <Properties>
+        <Property name="text" type="java.lang.String" value="192.168.134.4"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
       <Events>
@@ -112,6 +113,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="usernameTxtField">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ereyes"/>
+      </Properties>
       <Events>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="usernameTxtFieldKeyReleased"/>
       </Events>
@@ -122,6 +126,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JPasswordField" name="passwordTxtField">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Dios1Padre"/>
+      </Properties>
       <Events>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="passwordTxtFieldKeyReleased"/>
       </Events>

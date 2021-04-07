@@ -7,6 +7,10 @@ package com.firecodes.views;
 
 import com.firecodes.services.GlobalService;
 import java.awt.event.KeyEvent;
+import java.util.Properties;
+import javax.naming.Context;
+import javax.naming.directory.DirContext;
+import javax.naming.directory.InitialDirContext;
 import javax.swing.JOptionPane;
 
 /**
@@ -54,6 +58,7 @@ public class LoginView extends javax.swing.JFrame {
         domainLabel.setLabelFor(domainTxtField);
         domainLabel.setText("Dominio:");
 
+        domainTxtField.setText("192.168.134.4");
         domainTxtField.setToolTipText("");
         domainTxtField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -63,6 +68,7 @@ public class LoginView extends javax.swing.JFrame {
 
         usernameLabel.setText("Nombre de usuario:");
 
+        usernameTxtField.setText("ereyes");
         usernameTxtField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 usernameTxtFieldKeyReleased(evt);
@@ -71,6 +77,7 @@ public class LoginView extends javax.swing.JFrame {
 
         passwordLabel.setText("Contraseña:");
 
+        passwordTxtField.setText("Dios1Padre");
         passwordTxtField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 passwordTxtFieldKeyReleased(evt);
@@ -165,6 +172,32 @@ public class LoginView extends javax.swing.JFrame {
     // Method to do login
     private void login() {
         if (this.verifyInputs()) {
+            String[] splittedDomain = this.domainTxtField.getText().split("\\.");
+            String baseDomain = "";
+            for (int i = 0; i < splittedDomain.length; i++) {
+                if (i + 1 != splittedDomain.length) {
+                    baseDomain += "DC=" + splittedDomain[i] + ",";
+                } else {
+                    baseDomain += "DC=" + splittedDomain[i];
+                }
+            }
+            try {
+                System.out.println("Splitted domain is:" + baseDomain);
+                Properties env = new Properties();
+                env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
+                env.put(Context.PROVIDER_URL, "ldap://" + this.domainTxtField.getText());
+                env.put(Context.SECURITY_AUTHENTICATION, "simple");
+                env.put(Context.SECURITY_PRINCIPAL, this.usernameTxtField.getText()+"@nsel-clnsa.com.ni");
+                env.put(Context.SECURITY_CREDENTIALS, this.passwordTxtField.getText());
+                DirContext con = new InitialDirContext(env);
+                con.close();
+                System.out.println("Inicio de sesión Correcto.");
+                this.service.showMessage(this, "Inicio de sesión correcto", "Inicio de sesion correcto", "info");
+            } catch (Exception e) {
+                System.out.println("Inicio de sesión erróneo: " + e.toString());
+                this.service.showMessage(this, "Inicio de sesión erróneo: ", e.toString(), "error");
+            }
+
             this.service.showMessage(this, "Inicio de sesión completo", "Inicio de sesión completo", "plain");
         }
     }
